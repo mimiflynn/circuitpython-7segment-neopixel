@@ -17,8 +17,8 @@ WHITE = (255, 255, 255)
 
 BRIGHTNESS = .3
 
-colors = [PINK, RED, ORANGE, YELLOW, GREEN,
-          CYAN, PURPLE, BLUE, LIGHT_BLUE, WHITE]
+colors = [BLUE, RED, ORANGE, YELLOW, GREEN,
+          CYAN, PURPLE, PINK, LIGHT_BLUE, WHITE]
 
 # NeoPixel setup
 pixels_hour = neopixel.NeoPixel(board.D3, 15, brightness=BRIGHTNESS)
