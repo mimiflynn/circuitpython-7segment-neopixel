@@ -21,8 +21,8 @@ colors = [PINK, RED, ORANGE, YELLOW, GREEN,
           CYAN, PURPLE, BLUE, LIGHT_BLUE, WHITE]
 
 # NeoPixel setup
-pixels_hour = neopixel.NeoPixel(board.D1, 15, brightness=BRIGHTNESS)
-pixels_minute = neopixel.NeoPixel(board.D2, 15, brightness=BRIGHTNESS)
+pixels_hour = neopixel.NeoPixel(board.D3, 15, brightness=BRIGHTNESS)
+pixels_minute = neopixel.NeoPixel(board.D4, 15, brightness=BRIGHTNESS)
 
 pixels_hour.fill(BLACK)
 pixels_minute.fill(BLACK)
@@ -362,19 +362,12 @@ def clear():
     pixels_minute.fill(BLACK)
 
 
-colons(BLACK)
-
-
-
 while True:
     for i in range(10):
+        colons(colors[i])
         digit_1(i, colors[i])
         digit_2(i, colors[i])
         digit_3(i, colors[i])
         digit_4(i, colors[i])
         time.sleep(1)
         clear()
-
-
-
-
