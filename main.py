@@ -2,23 +2,15 @@ import board
 import time
 import neopixel
 
-# Colors
-BLACK = (0, 0, 0)
-RED = (255, 0, 0)
-PINK = (255, 100, 120)
-ORANGE = (255, 100, 0)
-YELLOW = (255, 255, 0)
-GREEN = (0, 255, 0)
-CYAN = (0, 255, 255)
-PURPLE = (255, 0, 255)
-BLUE = (0, 0, 255)
-LIGHT_BLUE = (80, 200, 175)
-WHITE = (255, 255, 255)
-
 BRIGHTNESS = .6
 
-colors = [BLUE, RED, ORANGE, YELLOW, GREEN,
-          CYAN, PURPLE, PINK, LIGHT_BLUE, WHITE]
+# NeoPixel setup
+pixels_minutes = neopixel.NeoPixel(board.D3, 15, brightness=BRIGHTNESS, auto_write=False)
+pixels_seconds = neopixel.NeoPixel(board.D4, 15, brightness=BRIGHTNESS,  auto_write=False)
+
+pixels_minutes.fill((0,0,0))
+pixels_seconds.fill((0,0,0))
+
 
 def wheel(pos):
     # Input a value 0 to 255 to get a color value.
@@ -40,13 +32,6 @@ def wheel(pos):
         g = int(pos*3)
         b = int(255 - pos*3)
     return (g, r, b)
-
-# NeoPixel setup
-pixels_minutes = neopixel.NeoPixel(board.D3, 15, brightness=BRIGHTNESS, auto_write=False)
-pixels_seconds = neopixel.NeoPixel(board.D4, 15, brightness=BRIGHTNESS,  auto_write=False)
-
-pixels_minutes.fill(BLACK)
-pixels_seconds.fill(BLACK)
 
 
 def digit_1(value, color):
@@ -379,8 +364,8 @@ def colons(color):
 
 
 def clear():
-    pixels_minutes.fill(BLACK)
-    pixels_seconds.fill(BLACK)
+    pixels_minutes.fill((0,0,0))
+    pixels_seconds.fill((0,0,0))
 
 
 def convert_time(seconds):
@@ -398,7 +383,6 @@ def display(value, color):
 
 
 elapsed = 0000
-# color = RED
 
 while True:
     print(elapsed)
