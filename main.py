@@ -388,7 +388,7 @@ while True:
     print(elapsed)
     color = wheel(elapsed & 255)
     clear()
-    time.sleep(1)
+    time.sleep(0.78) # eyeball calibration ftw
     colons(color)
     display(elapsed, color)
     pixels_minutes.show()
