@@ -393,4 +393,7 @@ while True:
     display(elapsed, color)
     pixels_minutes.show()
     pixels_seconds.show()
-    elapsed += 1
+    if elapsed == 3599:
+        elapsed = 0000
+    else:
+        elapsed += 1
