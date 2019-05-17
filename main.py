@@ -15,14 +15,35 @@ BLUE = (0, 0, 255)
 LIGHT_BLUE = (80, 200, 175)
 WHITE = (255, 255, 255)
 
-BRIGHTNESS = .3
+BRIGHTNESS = .6
 
 colors = [BLUE, RED, ORANGE, YELLOW, GREEN,
           CYAN, PURPLE, PINK, LIGHT_BLUE, WHITE]
 
+def wheel(pos):
+    # Input a value 0 to 255 to get a color value.
+    # The colours are a transition r - g - b - back to r.
+    if pos < 0 or pos > 255:
+        r = g = b = 0
+    elif pos < 85:
+        r = int(pos * 3)
+        g = int(255 - pos*3)
+        b = 0
+    elif pos < 170:
+        pos -= 85
+        r = int(255 - pos*3)
+        g = 0
+        b = int(pos*3)
+    else:
+        pos -= 170
+        r = 0
+        g = int(pos*3)
+        b = int(255 - pos*3)
+    return (g, r, b)
+
 # NeoPixel setup
-pixels_hour = neopixel.NeoPixel(board.D3, 15, brightness=BRIGHTNESS)
-pixels_minute = neopixel.NeoPixel(board.D4, 15, brightness=BRIGHTNESS)
+pixels_hour = neopixel.NeoPixel(board.D3, 15, brightness=BRIGHTNESS, auto_write=False)
+pixels_minute = neopixel.NeoPixel(board.D4, 15, brightness=BRIGHTNESS,  auto_write=False)
 
 pixels_hour.fill(BLACK)
 pixels_minute.fill(BLACK)
@@ -362,12 +383,23 @@ def clear():
     pixels_minute.fill(BLACK)
 
 
+def display(value, color):
+    digits = str(value)
+    digit_1(int(digits[0]), color)
+    digit_2(int(digits[1]), color)
+    digit_3(int(digits[2]), color)
+    digit_4(int(digits[3]), color)
+
+
+elapsed = 1000
+color = RED
+
 while True:
-    for i in range(10):
-        colons(colors[i])
-        digit_1(i, colors[i])
-        digit_2(i, colors[i])
-        digit_3(i, colors[i])
-        digit_4(i, colors[i])
-        time.sleep(1)
-        clear()
+    print(elapsed)
+    clear()
+    time.sleep(1)
+    colons(color)
+    display(elapsed, color)
+    pixels_hour.show()
+    pixels_minute.show()
+    elapsed += 1
